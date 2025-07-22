@@ -1,693 +1,730 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>營隊探索 - 找到最適合孩子的營隊體驗</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="專為台灣家長設計的營隊搜尋平台，輕鬆找到適合孩子年齡的科學、戶外、運動營隊。">
+    <meta name="keywords" content="夏令營,冬令營,兒童營隊,科學營,戶外營,台灣營隊">
+    <meta property="og:title" content="營隊探索 - 找到最適合孩子的營隊體驗">
+    <meta property="og:description" content="專為台灣家長設計的營隊搜尋平台，輕鬆找到適合孩子年齡的科學、戶外、運動營隊。">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+        
+        .badge {
+            background: #fef3c7;
+            color: #d97706;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            margin-left: 1rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .features {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+        }
+        
+        /* Search Section */
+        .search-section {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .search-input {
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        /* Camp Grid */
+        .camps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .camp-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .camp-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .camp-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #e2e8f0;
+        }
+        
+        .camp-content {
+            padding: 1.5rem;
+        }
+        
+        .camp-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+        
+        .camp-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .camp-details {
+            margin-bottom: 1rem;
+        }
+        
+        .camp-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        
+        .camp-categories {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .category-tag {
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+        }
+        
+        .camp-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .camp-rating {
+            color: #fbbf24;
+            font-size: 0.9rem;
+        }
+        
+        .camp-price {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        
+        .camp-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+        
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 0.75rem;
+            width: 50px;
+        }
+        
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .footer p, .footer li {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer ul {
+            list-style: none;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+        
+        /* Feedback Button */
+        .feedback-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+            z-index: 1000;
+        }
+        
+        .feedback-btn:hover {
+            background: #2563eb;
+            transform: scale(1.05);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .camps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="zh-TW"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;營隊探索 - 找到最適合孩子的營隊體驗&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/react@18/umd/react.development.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/@babel/standalone/babel.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- SEO Meta Tags --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="description" content="專為台灣家長設計的營隊搜尋平台，輕鬆找到適合孩子年齡的科學、戶外、運動營隊。"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="keywords" content="夏令營,冬令營,兒童營隊,科學營,戶外營,台灣營隊"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta property="og:title" content="營隊探索 - 找到最適合孩子的營隊體驗"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta property="og:description" content="專為台灣家長設計的營隊搜尋平台，輕鬆找到適合孩子年齡的科學、戶外、運動營隊。"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta property="og:image" content="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1200&amp;h=630&amp;fit=crop"&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.line-clamp-2 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: -webkit-box;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>-webkit-line-clamp: 2;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>-webkit-box-orient: vertical;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.feedback-form {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: fixed;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>bottom: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>right: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 10px 25px rgba(0,0,0,0.1);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #e5e7eb;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-width: 320px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>z-index: 1000;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.feedback-toggle {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: fixed;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>bottom: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>right: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #3b82f6;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 56px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 56px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>z-index: 1001;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.feedback-toggle:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #2563eb;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1.05);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.2s;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body class="bg-gray-50"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="app"&gt;&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script type="text/babel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const { useState, useMemo } = React;</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const CampWebsite = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const [searchQuery, setSearchQuery] = useState('');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const [selectedCategory, setSelectedCategory] = useState('all');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const [ageRange, setAgeRange] = useState([1, 12]);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const [overnight, setOvernight] = useState('all');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const [favorites, setFavorites] = useState([]);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const [showFeedback, setShowFeedback] = useState(false);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const [feedbackData, setFeedbackData] = useState({</p>
-<p class="p1"><span class="Apple-converted-space">                </span>rating: 5,</p>
-<p class="p1"><span class="Apple-converted-space">                </span>comment: '',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>email: '',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>interest: 'user'</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// 實際營隊資料（從你的 Google Sheets 轉換）</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const camps = [</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>id: 1,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>title: "池南｜趣，森活",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>startDate: "2025-07-30",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>endDate: "2025-08-02",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>description: "野炊x立槳體驗x夜間觀察x童玩遊戲 (暑假後4-7年級)",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>location: "花蓮池南",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageStart: 4,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageEnd: 7,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>overnight: true,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>price: 8800,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>categories: ["戶外"],</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&amp;h=250&amp;fit=crop",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>rating: 4.8,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>reviews: 42,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>url: "https://reurl.cc/NYqyvQ"</p>
-<p class="p1"><span class="Apple-converted-space">                </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>id: 2,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>title: "從山林到海洋-小小博物學家夏令營",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>startDate: "2025-07-17",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>endDate: "2025-07-18",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>description: "從海濱生態的認識、植物的觀察與紀錄，到認識廚房裡的海洋科學、搭乘潮境方舟1號出海",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>location: "基隆海科館",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageStart: 3,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageEnd: 6,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>overnight: false,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>price: 3200,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>categories: ["科學", "生物"],</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&amp;h=250&amp;fit=crop",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>rating: 4.6,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>reviews: 28,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>url: "https://nmmst.fonticket.com/ticket/jQrK0VaMg8RkLE7o"</p>
-<p class="p1"><span class="Apple-converted-space">                </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>id: 3,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>title: "國小一、二年級天文營",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>startDate: "2025-07-05",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>endDate: "2025-07-05",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>description: "天文課程講授、動手做、立體劇場、宇宙劇場、搭乘宇宙探險車、展示場及特展參觀",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>location: "台北天文館",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageStart: 1,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageEnd: 2,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>overnight: false,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>price: 1500,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>categories: ["科學"],</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>image: "https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=400&amp;h=250&amp;fit=crop",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>rating: 4.9,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>reviews: 156,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>url: "https://tam.gov.taipei/"</p>
-<p class="p1"><span class="Apple-converted-space">                </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>id: 4,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>title: "攀岩+體適能增強五日營",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>startDate: "2025-07-05",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>endDate: "2025-07-09",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>description: "透過攀岩結合運動訓練，讓孩子們強化身體素質、培養專注力與自信心，在挑戰中成長",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>location: "台北天母",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageStart: 3,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageEnd: 8,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>overnight: false,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>price: 6800,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>categories: ["戶外", "運動"],</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>image: "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=400&amp;h=250&amp;fit=crop",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>rating: 4.7,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>reviews: 89,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>url: "#"</p>
-<p class="p1"><span class="Apple-converted-space">                </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>id: 5,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>title: "數學實驗營｜夏季主題",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>startDate: "2025-07-07",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>endDate: "2025-07-11",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>description: "帶領孩子用動手做的方式學習數學！兩大主題跨領域學習",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>location: "大台北地區",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageStart: 3,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageEnd: 6,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>overnight: false,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>price: 4200,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>categories: ["科學"],</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&amp;h=250&amp;fit=crop",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>rating: 4.5,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>reviews: 67,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>url: "https://numeracylab.com/archives/pan_event_cat/25sum"</p>
-<p class="p1"><span class="Apple-converted-space">                </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>id: 6,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>title: "關渡自然公園暑期兒童營隊",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>startDate: "2025-07-02",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>endDate: "2025-07-04",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>description: "溼地探險家冒險！透過兩棲類調查、昆蟲調查、合作闖關等方法，認識關渡溼地環境",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>location: "關渡自然公園",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageStart: 3,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageEnd: 7,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>overnight: true,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>price: 6200,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>categories: ["戶外", "生物", "科學"],</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&amp;h=250&amp;fit=crop",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>rating: 4.8,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>reviews: 134,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>url: "https://gd-park.org.tw/education/4952"</p>
-<p class="p1"><span class="Apple-converted-space">                </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>id: 7,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>title: "台大自然保育營",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>startDate: "2025-08-22",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>endDate: "2025-08-25",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>description: "四天三夜的自然保育營，走進梅峰與合歡山，用眼睛觀察、用耳朵聆聽、用心體會自然的脈動",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>location: "梅峰 &amp; 合歡山",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageStart: 10,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageEnd: 12,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>overnight: true,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>price: 12500,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>categories: ["生物", "科學", "美學"],</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&amp;h=250&amp;fit=crop",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>rating: 4.9,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>reviews: 78,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>url: "#"</p>
-<p class="p1"><span class="Apple-converted-space">                </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>id: 8,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>title: "昆蟲學家攻略",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>startDate: "2025-07-22",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>endDate: "2025-07-24",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>description: "深入昆蟲世界！從野外採集調查到室內實驗操作，從農業害蟲到病媒防治，全面探索昆蟲科學",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>location: "中興大學",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageStart: 7,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ageEnd: 12,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>overnight: false,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>price: 7500,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>categories: ["生物"],</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&amp;h=250&amp;fit=crop",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>rating: 4.7,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>reviews: 92,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>url: "https://www.siileec.com/subject.php?sn=5490"</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const categories = [</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ value: 'all', label: '全部類別' },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ value: '戶外', label: '戶外探索' },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ value: '科學', label: '科學實驗' },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ value: '生物', label: '生物觀察' },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ value: '運動', label: '運動體能' },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ value: '美學', label: '美學創作' }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const filteredCamps = useMemo(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>return camps.filter(camp =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const matchesSearch = camp.title.toLowerCase().includes(searchQuery.toLowerCase()) ||</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>camp.description.toLowerCase().includes(searchQuery.toLowerCase());</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const matchesCategory = selectedCategory === 'all' ||<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                          </span>camp.categories.includes(selectedCategory);</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const matchesAge = camp.ageStart &lt;= ageRange[1] &amp;&amp; camp.ageEnd &gt;= ageRange[0];</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const matchesOvernight = overnight === 'all' ||<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                           </span>(overnight === 'yes' &amp;&amp; camp.overnight) ||</p>
-<p class="p1"><span class="Apple-converted-space">                                           </span>(overnight === 'no' &amp;&amp; !camp.overnight);</p>
-<p class="p2"><span class="Apple-converted-space">                    </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>return matchesSearch &amp;&amp; matchesCategory &amp;&amp; matchesAge &amp;&amp; matchesOvernight;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>});</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}, [searchQuery, selectedCategory, ageRange, overnight]);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const toggleFavorite = (campId) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>setFavorites(prev =&gt;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>prev.includes(campId)<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>? prev.filter(id =&gt; id !== campId)</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>: [...prev, campId]</p>
-<p class="p1"><span class="Apple-converted-space">                </span>);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const formatPrice = (price) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>return `NT$ ${price.toLocaleString()}`;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const handleFeedbackSubmit = (e) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>e.preventDefault();</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// 收集回饋資料</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const feedback = {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>rating: feedbackData.rating,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>comment: feedbackData.comment,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>email: feedbackData.email,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>interest: feedbackData.interest,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>timestamp: new Date().toISOString(),</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>userAgent: navigator.userAgent,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>url: window.location.href</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// 你可以在這裡整合 Google Forms、Airtable 或其他收集工具</p>
-<p class="p1"><span class="Apple-converted-space">                </span>console.log('用戶回饋:', feedback);</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>alert(`感謝您的 ${feedbackData.rating} 星評價！\n\n您的寶貴建議我們已經收到，會盡快改進產品。\n\n如果您留了 email，我們會在產品上線時通知您！`);</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>setShowFeedback(false);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>setFeedbackData({</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>rating: 5,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>comment: '',</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>email: '',</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>interest: 'user'</p>
-<p class="p1"><span class="Apple-converted-space">                </span>});</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="min-h-screen bg-gray-50"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{/* Header */}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;header className="bg-white shadow-sm border-b"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="flex items-center justify-between"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div className="flex items-center space-x-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;h1 className="text-2xl font-bold text-blue-600"&gt;營隊探索&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span className="hidden sm:inline text-sm text-gray-500 bg-yellow-100 px-2 py-1 rounded-full"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>🚀 MVP 測試版</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div className="flex items-center space-x-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span className="text-sm text-gray-600"&gt;找到最適合孩子的營隊體驗&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{/* Hero Banner */}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl text-white p-8 mb-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="max-w-2xl"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h2 className="text-3xl font-bold mb-4"&gt;暑假來了！為孩子選個好營隊&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p className="text-blue-100 mb-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>從科學實驗到戶外探險，從生物觀察到運動體能，一站式搜尋全台優質營隊</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div className="flex flex-col sm:flex-row gap-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span className="text-sm bg-white/20 px-3 py-2 rounded-full"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;i className="fas fa-check mr-2"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>精選 {camps.length}+ 優質營隊</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span className="text-sm bg-white/20 px-3 py-2 rounded-full"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;i className="fas fa-star mr-2"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>真實家長評價</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span className="text-sm bg-white/20 px-3 py-2 rounded-full"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;i className="fas fa-filter mr-2"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>智能篩選推薦</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{/* Search and Filters */}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="bg-white rounded-xl shadow-sm p-6 mb-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>{/* Search */}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div className="relative"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;i className="fas fa-search absolute left-3 top-3 text-gray-400"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;input</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>type="text"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>placeholder="搜尋營隊名稱或內容..."</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>value={searchQuery}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>onChange={(e) =&gt; setSearchQuery(e.target.value)}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                                </span>{/* Category */}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;select</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>value={selectedCategory}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>onChange={(e) =&gt; setSelectedCategory(e.target.value)}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>{categories.map(cat =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;option key={cat.value} value={cat.value}&gt;{cat.label}&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>))}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/select&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                                </span>{/* Age Range */}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label className="block text-sm font-medium text-gray-700 mb-1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>年級範圍: {ageRange[0]}-{ageRange[1]} 年級</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;input</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>type="range"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>min="1"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>max="12"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>step="1"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>className="w-full"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>value={ageRange[1]}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>onChange={(e) =&gt; setAgeRange([1, parseInt(e.target.value)])}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                                </span>{/* Overnight */}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;select</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>value={overnight}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>onChange={(e) =&gt; setOvernight(e.target.value)}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;option value="all"&gt;過夜與否&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;option value="no"&gt;不過夜&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;option value="yes"&gt;需過夜&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="flex items-center text-sm text-gray-600"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;i className="fas fa-filter mr-2"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>找到 {filteredCamps.length} 個營隊</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{/* Camp Grid */}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>{filteredCamps.map(camp =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div key={camp.id} className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow overflow-hidden"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>{/* Image */}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div className="relative"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;img</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>src={camp.image}</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>alt={camp.title}</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>className="w-full h-48 object-cover"</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>onError={(e) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>e.target.src = `https://via.placeholder.com/400x250/3B82F6/FFFFFF?text=${encodeURIComponent(camp.categories[0])}`;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>}}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;button</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>onClick={() =&gt; toggleFavorite(camp.id)}</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>className="absolute top-3 right-3 p-2 bg-white/80 rounded-full hover:bg-white transition-colors"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;i className={`fas fa-heart ${favorites.includes(camp.id) ? 'text-red-500' : 'text-gray-600'}`}&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>{camp.overnight &amp;&amp; (</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;span className="absolute top-3 left-3 bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>🏕️ 過夜營隊</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>)}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>{/* Content */}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div className="p-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;h3 className="font-semibold text-lg text-gray-900 mb-2 line-clamp-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>{camp.title}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;/h3&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                                        </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;p className="text-gray-600 text-sm mb-3 line-clamp-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>{camp.description}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;div className="space-y-2 mb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;div className="flex items-center text-sm text-gray-600"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;i className="fas fa-calendar mr-2 w-4"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>{camp.startDate} {camp.startDate !== camp.endDate &amp;&amp; `~ ${camp.endDate.split('-')[1]}-${camp.endDate.split('-')[2]}`}</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                                            </span></p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;div className="flex items-center text-sm text-gray-600"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;i className="fas fa-map-marker-alt mr-2 w-4"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>{camp.location}</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                                            </span></p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;div className="flex items-center text-sm text-gray-600"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;i className="fas fa-users mr-2 w-4"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>{camp.ageStart === camp.ageEnd ? `${camp.ageStart}年級` : `${camp.ageStart}-${camp.ageEnd}年級`}</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>{/* Categories */}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;div className="flex flex-wrap gap-1 mb-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>{camp.categories.map(category =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;span</p>
-<p class="p1"><span class="Apple-converted-space">                                                    </span>key={category}</p>
-<p class="p1"><span class="Apple-converted-space">                                                    </span>className="bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded-full"</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                    </span>{category}</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>))}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>{/* Rating and Price */}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;div className="flex items-center justify-between mb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;div className="flex items-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;i className="fas fa-star text-yellow-400 text-sm"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;span className="text-sm font-medium text-gray-900 ml-1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                    </span>{camp.rating}</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;span className="text-sm text-gray-500 ml-1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                    </span>({camp.reviews})</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                                            </span></p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;div className="text-right"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;div className="text-blue-600 font-semibold"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                    </span>{formatPrice(camp.price)}</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>{/* Action Buttons */}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;div className="flex space-x-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;a</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>href={camp.url}</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>target="_blank"</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>rel="noopener noreferrer"</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium text-center"</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>onClick={() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                                                    </span>// 追蹤點擊事件</p>
-<p class="p1"><span class="Apple-converted-space">                                                    </span>console.log('營隊點擊:', camp.title);</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>}}</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>查看詳情</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;button<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>onClick={() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                                                    </span>navigator.share ?<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                                        </span>navigator.share({</p>
-<p class="p1"><span class="Apple-converted-space">                                                            </span>title: camp.title,</p>
-<p class="p1"><span class="Apple-converted-space">                                                            </span>text: camp.description,</p>
-<p class="p1"><span class="Apple-converted-space">                                                            </span>url: window.location.href</p>
-<p class="p1"><span class="Apple-converted-space">                                                        </span>}) :</p>
-<p class="p1"><span class="Apple-converted-space">                                                        </span>navigator.clipboard.writeText(`${camp.title} - ${window.location.href}`);</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>}}</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;i className="fas fa-share-alt text-gray-600"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>))}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{/* Empty State */}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{filteredCamps.length === 0 &amp;&amp; (</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="text-center py-12"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div className="text-gray-400 mb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;i className="fas fa-search text-6xl"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h3 className="text-lg font-medium text-gray-900 mb-2"&gt;找不到符合條件的營隊&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p className="text-gray-600 mb-4"&gt;請試著調整搜尋條件或瀏覽其他類別&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>onClick={() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>setSearchQuery('');</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>setSelectedCategory('all');</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>setAgeRange([1, 12]);</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>setOvernight('all');</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>}}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>重置篩選條件</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>)}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{/* Feedback Button */}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{!showFeedback &amp;&amp; (</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>onClick={() =&gt; setShowFeedback(true)}</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>className="feedback-toggle"</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>title="提供回饋 - 您的意見很重要！"</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i className="fas fa-comment-dots"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>)}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{/* Feedback Form */}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{showFeedback &amp;&amp; (</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="feedback-form"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="flex items-center justify-between mb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h3 className="font-semibold text-gray-900"&gt;您的回饋很重要！&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>onClick={() =&gt; setShowFeedback(false)}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>className="text-gray-400 hover:text-gray-600"</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;i className="fas fa-times"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                            </span></p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;form onSubmit={handleFeedbackSubmit}&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div className="mb-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label className="block text-sm font-medium text-gray-700 mb-1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>您對這個 MVP 的評價</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;select</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-blue-500"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>value={feedbackData.rating}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>onChange={(e) =&gt; setFeedbackData({...feedbackData, rating: parseInt(e.target.value)})}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;option value={5}&gt;⭐⭐⭐⭐⭐ 非常好&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;option value={4}&gt;⭐⭐⭐⭐ 好&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;option value={3}&gt;⭐⭐⭐ 普通&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;option value={2}&gt;⭐⭐ 需改善&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;option value={1}&gt;⭐ 不好&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                                </span></p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div className="mb-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label className="block text-sm font-medium text-gray-700 mb-1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>您的身分</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;select</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-blue-500"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>value={feedbackData.interest}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>onChange={(e) =&gt; setFeedbackData({...feedbackData, interest: e.target.value})}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;option value="user"&gt;🧑‍🤝‍🧑 我是家長，在找營隊&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;option value="organizer"&gt;🏕️ 我是營隊主辦方&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;option value="investor"&gt;💼 我是投資人/合作夥伴&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;option value="other"&gt;🤔 其他&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                                </span></p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div className="mb-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;textarea</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>placeholder="您的建議或想法...（例如：希望增加什麼功能？使用上有什麼問題？）"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-blue-500"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>rows="3"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>value={feedbackData.comment}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>onChange={(e) =&gt; setFeedbackData({...feedbackData, comment: e.target.value})}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                                </span></p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div className="mb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;input</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>type="email"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>placeholder="您的 Email（可選，產品上線時通知您）"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-blue-500"</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>value={feedbackData.email}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>onChange={(e) =&gt; setFeedbackData({...feedbackData, email: e.target.value})}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                                </span></p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>type="submit"</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>className="w-full bg-blue-600 text-white py-2 px-4 rounded text-sm hover:bg-blue-700 transition-colors font-medium"</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>🚀 送出回饋</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/form&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>)}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{/* Footer */}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;footer className="bg-gray-900 text-white py-12 mt-16"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="grid grid-cols-1 md:grid-cols-3 gap-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;h3 className="text-lg font-semibold mb-4"&gt;營隊探索&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p className="text-gray-400 text-sm mb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>為孩子找到最棒的學習體驗，讓每個暑假都充滿意義。</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p className="text-gray-400 text-xs"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>🚀 這是 MVP 測試版，歡迎提供回饋！</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;h4 className="font-medium mb-3"&gt;營隊類別&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;ul className="space-y-2 text-sm text-gray-400"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;li&gt;🏕️ 戶外探索營隊&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;li&gt;🧪 科學實驗營隊&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;li&gt;🦋 生物觀察營隊&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;li&gt;⚽ 運動體能營隊&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;li&gt;🎨 美學創作營隊&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;h4 className="font-medium mb-3"&gt;聯絡我們&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;ul className="space-y-2 text-sm text-gray-400"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;li&gt;📧 Email: camp@example.com&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;li&gt;📱 LINE: @camp-explorer&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;li&gt;📍 基於台灣的營隊資訊&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;li className="mt-4 pt-2 border-t border-gray-700"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;span className="text-xs"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>數據來源：公開營隊資訊整理&lt;br/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>持續更新中...</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p&gt;&amp;copy; 2025 營隊探索 MVP. 歡迎分享與回饋 ❤️&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/footer&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// 初始化應用</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ReactDOM.render(&lt;CampWebsite /&gt;, document.getElementById('app'));</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// 簡單的使用追蹤（可選）</p>
-<p class="p1"><span class="Apple-converted-space">        </span>console.log('營隊探索 MVP 已載入！');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>console.log('頁面載入時間:', new Date().toLocaleString());</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <span class="logo">營隊探索</span>
+                    <span class="badge">🚀 MVP 測試版</span>
+                </div>
+                <div>找到最適合孩子的營隊體驗</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>暑假來了！為孩子選個好營隊</h1>
+            <p>從科學實驗到戶外探險，從生物觀察到運動體能，一站式搜尋全台優質營隊</p>
+            <div class="features">
+                <div class="feature">✅ 精選 8+ 優質營隊</div>
+                <div class="feature">⭐ 真實家長評價</div>
+                <div class="feature">🔍 智能篩選推薦</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="search-section">
+            <div class="search-grid">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 搜尋營隊名稱或內容...">
+                
+                <select id="categorySelect" class="search-input">
+                    <option value="all">全部類別</option>
+                    <option value="戶外">戶外探索</option>
+                    <option value="科學">科學實驗</option>
+                    <option value="生物">生物觀察</option>
+                    <option value="運動">運動體能</option>
+                    <option value="美學">美學創作</option>
+                </select>
+                
+                <select id="ageSelect" class="search-input">
+                    <option value="all">全部年級</option>
+                    <option value="1-3">國小低年級 (1-3年級)</option>
+                    <option value="4-6">國小高年級 (4-6年級)</option>
+                    <option value="7-9">國中 (7-9年級)</option>
+                    <option value="10-12">高中 (10-12年級)</option>
+                </select>
+                
+                <select id="overnightSelect" class="search-input">
+                    <option value="all">過夜與否</option>
+                    <option value="no">不過夜</option>
+                    <option value="yes">需過夜</option>
+                </select>
+            </div>
+            
+            <div id="resultsCount">找到 8 個營隊</div>
+        </section>
+
+        <section id="campsGrid" class="camps-grid">
+            <!-- 營隊卡片會由 JavaScript 生成 -->
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>營隊探索</h3>
+                    <p>為孩子找到最棒的學習體驗，讓每個暑假都充滿意義。</p>
+                    <p style="font-size: 0.8rem; margin-top: 1rem;">🚀 這是 MVP 測試版，歡迎提供回饋！</p>
+                </div>
+                <div>
+                    <h3>營隊類別</h3>
+                    <ul>
+                        <li>🏕️ 戶外探索營隊</li>
+                        <li>🧪 科學實驗營隊</li>
+                        <li>🦋 生物觀察營隊</li>
+                        <li>⚽ 運動體能營隊</li>
+                        <li>🎨 美學創作營隊</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>聯絡我們</h3>
+                    <ul>
+                        <li>📧 Email: camp@example.com</li>
+                        <li>📱 LINE: @camp-explorer</li>
+                        <li>📍 基於台灣的營隊資訊</li>
+                        <li style="margin-top: 1rem; font-size: 0.8rem;">
+                            數據來源：公開營隊資訊整理<br>
+                            持續更新中...
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 營隊探索 MVP. 歡迎分享與回饋 ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="feedback-btn" onclick="showFeedback()" title="提供回饋">💬</button>
+
+    <script>
+        // 營隊資料
+        const camps = [
+            {
+                id: 1,
+                title: "池南｜趣，森活",
+                startDate: "2025-07-30",
+                endDate: "2025-08-02",
+                description: "野炊x立槳體驗x夜間觀察x童玩遊戲 (暑假後4-7年級)",
+                location: "花蓮池南",
+                ageStart: 4,
+                ageEnd: 7,
+                overnight: true,
+                price: 8800,
+                categories: ["戶外"],
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop",
+                rating: 4.8,
+                reviews: 42,
+                url: "https://reurl.cc/NYqyvQ"
+            },
+            {
+                id: 2,
+                title: "從山林到海洋-小小博物學家夏令營",
+                startDate: "2025-07-17",
+                endDate: "2025-07-18",
+                description: "從海濱生態的認識、植物的觀察與紀錄，到認識廚房裡的海洋科學、搭乘潮境方舟1號出海",
+                location: "基隆海科館",
+                ageStart: 3,
+                ageEnd: 6,
+                overnight: false,
+                price: 3200,
+                categories: ["科學", "生物"],
+                image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop",
+                rating: 4.6,
+                reviews: 28,
+                url: "https://nmmst.fonticket.com/ticket/jQrK0VaMg8RkLE7o"
+            },
+            {
+                id: 3,
+                title: "國小一、二年級天文營",
+                startDate: "2025-07-05",
+                endDate: "2025-07-05",
+                description: "天文課程講授、動手做、立體劇場、宇宙劇場、搭乘宇宙探險車、展示場及特展參觀",
+                location: "台北天文館",
+                ageStart: 1,
+                ageEnd: 2,
+                overnight: false,
+                price: 1500,
+                categories: ["科學"],
+                image: "https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=400&h=250&fit=crop",
+                rating: 4.9,
+                reviews: 156,
+                url: "https://tam.gov.taipei/"
+            },
+            {
+                id: 4,
+                title: "攀岩+體適能增強五日營",
+                startDate: "2025-07-05",
+                endDate: "2025-07-09",
+                description: "透過攀岩結合運動訓練，讓孩子們強化身體素質、培養專注力與自信心，在挑戰中成長",
+                location: "台北天母",
+                ageStart: 3,
+                ageEnd: 8,
+                overnight: false,
+                price: 6800,
+                categories: ["戶外", "運動"],
+                image: "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=400&h=250&fit=crop",
+                rating: 4.7,
+                reviews: 89,
+                url: "#"
+            },
+            {
+                id: 5,
+                title: "數學實驗營｜夏季主題",
+                startDate: "2025-07-07",
+                endDate: "2025-07-11",
+                description: "帶領孩子用動手做的方式學習數學！兩大主題跨領域學習",
+                location: "大台北地區",
+                ageStart: 3,
+                ageEnd: 6,
+                overnight: false,
+                price: 4200,
+                categories: ["科學"],
+                image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=250&fit=crop",
+                rating: 4.5,
+                reviews: 67,
+                url: "https://numeracylab.com/archives/pan_event_cat/25sum"
+            },
+            {
+                id: 6,
+                title: "關渡自然公園暑期兒童營隊",
+                startDate: "2025-07-02",
+                endDate: "2025-07-04",
+                description: "溼地探險家冒險！透過兩棲類調查、昆蟲調查、合作闖關等方法，認識關渡溼地環境",
+                location: "關渡自然公園",
+                ageStart: 3,
+                ageEnd: 7,
+                overnight: true,
+                price: 6200,
+                categories: ["戶外", "生物", "科學"],
+                image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop",
+                rating: 4.8,
+                reviews: 134,
+                url: "https://gd-park.org.tw/education/4952"
+            },
+            {
+                id: 7,
+                title: "台大自然保育營",
+                startDate: "2025-08-22",
+                endDate: "2025-08-25",
+                description: "四天三夜的自然保育營，走進梅峰與合歡山，用眼睛觀察、用耳朵聆聽、用心體會自然的脈動",
+                location: "梅峰 & 合歡山",
+                ageStart: 10,
+                ageEnd: 12,
+                overnight: true,
+                price: 12500,
+                categories: ["生物", "科學", "美學"],
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop",
+                rating: 4.9,
+                reviews: 78,
+                url: "#"
+            },
+            {
+                id: 8,
+                title: "昆蟲學家攻略",
+                startDate: "2025-07-22",
+                endDate: "2025-07-24",
+                description: "深入昆蟲世界！從野外採集調查到室內實驗操作，從農業害蟲到病媒防治，全面探索昆蟲科學",
+                location: "中興大學",
+                ageStart: 7,
+                ageEnd: 12,
+                overnight: false,
+                price: 7500,
+                categories: ["生物"],
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop",
+                rating: 4.7,
+                reviews: 92,
+                url: "https://www.siileec.com/subject.php?sn=5490"
+            }
+        ];
+
+        let filteredCamps = camps;
+
+        // 渲染營隊卡片
+        function renderCamps(campsToRender) {
+            const grid = document.getElementById('campsGrid');
+            const resultsCount = document.getElementById('resultsCount');
+            
+            resultsCount.textContent = `找到 ${campsToRender.length} 個營隊`;
+            
+            if (campsToRender.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                        <h3 style="margin-bottom: 1rem;">找不到符合條件的營隊</h3>
+                        <p style="color: #6b7280; margin-bottom: 2rem;">請試著調整搜尋條件或瀏覽其他類別</p>
+                        <button onclick="resetFilters()" class="btn btn-primary" style="display: inline-block;">重置篩選條件</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = campsToRender.map(camp => `
+                <div class="camp-card">
+                    <img src="${camp.image}" alt="${camp.title}" class="camp-image" 
+                         onerror="this.style.background='#e2e8f0'; this.alt='${camp.categories[0]} 營隊';">
+                    
+                    <div class="camp-content">
+                        <h3 class="camp-title">${camp.title}</h3>
+                        <p class="camp-description">${camp.description}</p>
+                        
+                        <div class="camp-details">
+                            <div class="camp-detail">
+                                📅 ${camp.startDate}${camp.startDate !== camp.endDate ? ' ~ ' + camp.endDate.split('-').slice(1).join('-') : ''}
+                            </div>
+                            <div class="camp-detail">
+                                📍 ${camp.location}
+                            </div>
+                            <div class="camp-detail">
+                                👥 ${camp.ageStart === camp.ageEnd ? camp.ageStart + '年級' : camp.ageStart + '-' + camp.ageEnd + '年級'}
+                            </div>
+                            ${camp.overnight ? '<div class="camp-detail">🏕️ 過夜營隊</div>' : ''}
+                        </div>
+                        
+                        <div class="camp-categories">
+                            ${camp.categories.map(cat => `<span class="category-tag">${cat}</span>`).join('')}
+                        </div>
+                        
+                        <div class="camp-footer">
+                            <div class="camp-rating">
+                                ⭐ ${camp.rating} (${camp.reviews})
+                            </div>
+                            <div class="camp-price">
+                                NT$ ${camp.price.toLocaleString()}
+                            </div>
+                        </div>
+                        
+                        <div class="camp-actions">
+                            <a href="${camp.url}" target="_blank" class="btn btn-primary">查看詳情</a>
+                            <button onclick="shareCamp(${camp.id})" class="btn btn-secondary">📤</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 篩選功能
+        function filterCamps() {
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            const selectedCategory = document.getElementById('categorySelect').value;
+            const selectedAge = document.getElementById('ageSelect').value;
+            const selectedOvernight = document.getElementById('overnightSelect').value;
+            
+            filteredCamps = camps.filter(camp => {
+                const matchesSearch = camp.title.toLowerCase().includes(searchQuery) ||
+                                    camp.description.toLowerCase().includes(searchQuery);
+                
+                const matchesCategory = selectedCategory === 'all' || 
+                                      camp.categories.includes(selectedCategory);
+                
+                let matchesAge = true;
+                if (selectedAge !== 'all') {
+                    const [minAge, maxAge] = selectedAge.split('-').map(Number);
+                    matchesAge = camp.ageStart <= maxAge && camp.ageEnd >= minAge;
+                }
+                
+                const matchesOvernight = selectedOvernight === 'all' || 
+                                       (selectedOvernight === 'yes' && camp.overnight) ||
+                                       (selectedOvernight === 'no' && !camp.overnight);
+                
+                return matchesSearch && matchesCategory && matchesAge && matchesOvernight;
+            });
+            
+            renderCamps(filteredCamps);
+        }
+
+        // 重置篩選條件
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('categorySelect').value = 'all';
+            document.getElementById('ageSelect').value = 'all';
+            document.getElementById('overnightSelect').value = 'all';
+            filterCamps();
+        }
+
+        // 分享營隊
+        function shareCamp(campId) {
+            const camp = camps.find(c => c.id === campId);
+            if (navigator.share) {
+                navigator.share({
+                    title: camp.title,
+                    text: camp.description,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(`${camp.title} - ${window.location.href}`)
+                    .then(() => alert('營隊連結已複製到剪貼簿！'));
+            }
+        }
+
+        // 顯示回饋表單
+        function showFeedback() {
+            const feedback = prompt('您對這個 MVP 有什麼建議嗎？\n\n1. 您是家長嗎？\n2. 會使用這樣的平台嗎？\n3. 希望增加什麼功能？');
+            if (feedback) {
+                console.log('用戶回饋:', {
+                    feedback,
+                    timestamp: new Date().toISOString(),
+                    url: window.location.href
+                });
+                alert('感謝您的回饋！我們會認真考慮您的建議。');
+            }
+        }
+
+        // 事件監聽器
+        document.getElementById('searchInput').addEventListener('input', filterCamps);
+        document.getElementById('categorySelect').addEventListener('change', filterCamps);
+        document.getElementById('ageSelect').addEventListener('change', filterCamps);
+        document.getElementById('overnightSelect').addEventListener('change', filterCamps);
+
+        // 初始化
+        renderCamps(camps);
+        
+        // 載入完成提示
+        console.log('營隊探索 MVP 已成功載入！');
+        console.log('頁面載入時間:', new Date().toLocaleString());
+        
+        // 簡單的使用追蹤
+        setTimeout(() => {
+            console.log('用戶停留時間: 10秒');
+        }, 10000);
+    </script>
 </body>
 </html>
